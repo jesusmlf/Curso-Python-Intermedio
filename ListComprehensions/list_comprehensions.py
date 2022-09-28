@@ -1,6 +1,3 @@
-from os import sched_getscheduler
-
-
 def run():
     #Crear una lista con los primeros 100 numeros naturales elevados al cuadrado.
     squares = []
