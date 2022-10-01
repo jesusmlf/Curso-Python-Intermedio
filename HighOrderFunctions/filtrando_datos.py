@@ -1,6 +1,3 @@
-from concurrent.futures.thread import _worker
-
-
 DATA = [
     {
         'name': 'Facundo',
@@ -73,6 +70,22 @@ DATA = [
         'language': 'python',
     },
 ]
+def busqueda(name:str,data:list):
+    #Esta función recibe un nombre y una lista de datos de personas.
+    #La función retornara la posicion del usuario en los datos.
+    pos = 0
+    names = [worker["name"] for worker in DATA]
+    
+    for i in names:
+        if name == i:
+            return pos
+        else:
+            pos += 1
+        
+def datosUsuarios(positions:list,data:list):
+    datosUsuarios = [data[x] for x in positions]
+    return datosUsuarios
+
 def run():
     #Obtener una lista de los trabajadores, cuyo lenguaje de programación es python.
     all_python_devs = [worker["name"] for worker in DATA if worker["language"] == "python"]
@@ -84,12 +97,16 @@ def run():
     all_Python_Platzi_devs = [worker["name"] for worker in DATA if worker["language"] == "python" and worker["organization"] == "Platzi"]
     
     
+    positions_Python_devs = [busqueda(x,DATA) for x in all_python_devs]
+    print(positions_Python_devs)
+    Datos_python_devs = datosUsuarios(positions_Python_devs,DATA)
     
-    print(all_python_devs)
-    print(all_Platzi_workers)
-    print(all_Python_Platzi_devs)
-    print(asd)
-
+    for i in Datos_python_devs:
+        print("\n")
+        for key,value in i.items():
+            print(key,value)
+    
+    
 
 if __name__ == '__main__':
     run()
