@@ -70,12 +70,13 @@ DATA = [
         'language': 'python',
     },
 ]
-def busqueda(name:str,data:list):
+def busquedaPorNombre(name:str,data:list):
     #Esta función recibe un nombre y una lista de datos de personas.
     #La función retornara la posicion del usuario en los datos.
     pos = 0
     names = [worker["name"] for worker in DATA]
-    
+    #info_workter = list(filter(lambda worker: worker["name"] == name,data))
+    #print(asd)
     for i in names:
         if name == i:
             return pos
@@ -97,7 +98,7 @@ def run():
     all_Python_Platzi_devs = [worker["name"] for worker in DATA if worker["language"] == "python" and worker["organization"] == "Platzi"]
     
     
-    positions_Python_devs = [busqueda(x,DATA) for x in all_python_devs]
+    positions_Python_devs = [busquedaPorNombre(x,DATA) for x in all_python_devs]
     print(positions_Python_devs)
     Datos_python_devs = datosUsuarios(positions_Python_devs,DATA)
     
@@ -106,7 +107,28 @@ def run():
         for key,value in i.items():
             print(key,value)
     
+    adults = list(filter(lambda worker: worker["age"] > 18,DATA))
+    adults = list(map(lambda worker: worker["name"],adults))
     
+    #old_people = list(map(lambda worker : worker | {"old" : worker["age"] > 70},DATA))
+    
+    """Reto.
+    1) Crear las listas all_python_devs y all_platzi_workers usando una combinacion 
+    de filter y map.
+    
+    2) Crear la lista old_people y aduls con list comprehensions.
+    """
+
+    #1)
+    all_python_devs = list(filter(lambda worker:worker["language"] == "python",DATA))
+    all_python_devs = list(map(lambda worker:worker["name"],all_python_devs))
+    
+    all_Platzi_workers = list(filter(lambda worker: worker["organization"] == "Platzi",DATA))
+    all_Platzi_workers = list(map(lambda worker: worker["name"],all_Platzi_workers))
+    
+    #2)
+    old_people = {}
+    adults = [worker["name"] for worker in DATA if worker["age"] >18]
 
 if __name__ == '__main__':
     run()
