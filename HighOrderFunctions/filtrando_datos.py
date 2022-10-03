@@ -99,7 +99,7 @@ def run():
     
     
     positions_Python_devs = [busquedaPorNombre(x,DATA) for x in all_python_devs]
-    print(positions_Python_devs)
+    
     Datos_python_devs = datosUsuarios(positions_Python_devs,DATA)
     
     for i in Datos_python_devs:
@@ -110,7 +110,7 @@ def run():
     adults = list(filter(lambda worker: worker["age"] > 18,DATA))
     adults = list(map(lambda worker: worker["name"],adults))
     
-    #old_people = list(map(lambda worker : worker | {"old" : worker["age"] > 70},DATA))
+    old_people = list(map(lambda worker : worker | {"old" : worker["age"] > 70},DATA))
     
     """Reto.
     1) Crear las listas all_python_devs y all_platzi_workers usando una combinacion 
@@ -127,8 +127,8 @@ def run():
     all_Platzi_workers = list(map(lambda worker: worker["name"],all_Platzi_workers))
     
     #2)
-    old_people = {}
+    old_people = [worker|{"old" : worker["age"] > 70} for worker in DATA]
     adults = [worker["name"] for worker in DATA if worker["age"] >18]
-
+    
 if __name__ == '__main__':
     run()
